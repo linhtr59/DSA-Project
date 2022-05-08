@@ -1,5 +1,5 @@
 // Full Name (StudentNum), Full Name (StudentNum)
-
+//Linh Trinh (23234683), Thai Hoang Long Nguyen(23147438)
 /**
  * An implementation of the Fines problem from the 2022 CITS2200 Project
  */
@@ -10,42 +10,40 @@ public class FinesImpl implements Fines {
 	private long count;
   public long countFines(int[] priorities) {
     // TODO: Implement your solution
+    quickSort(priorities, 0, (priorities.length -1));
+	return count;
   }
   
-  private void merge(int[] priorities, int left, int middle, int right) {
-	  int n = middle - left +1;
-	  int m = right - middle;
-	  int[] first = new int[n];
-	  int[] second = new int[m];
-	  for (int i =0; i <n; i++) {
-		  first[i] = priorities[left+1];
-		  
+  
+  private void quickSort(int[] priorities, int p, int r ) {
+	  if (p < r) {
+		  int pivot = partition(priorities,p,r);
+		  quickSort(priorities, p, pivot);
+		  quickSort(priorities, pivot + 1, r);
 	  }
-	  
-	  for (int i =0; i< m; i++) {
-		  second[i] = priorities[middle+1+i];
-	  }
-	  
-	  int j = 0;
-	  int i = 0;
-	  for (int k = left; k< right; k++) {
-		  if (i == n) {
-			  priorities[k] = second[j++];
-		  }
-		  else if(j ==m || first[i] < second[j]) {
-			  priorities[k] = first[i++];
-		  }
-		  else {
-			  priorities[k] = second[j++];
-			  
-		  }
-	  }  
   }
   
-  private void mergeSort(int[] priorities, int left, int right) {
-	  if (right>left) {
-		  int mid = (left+right)/2;
-		  mergeSort
+  
+  private int partition(int[] priorities, int p, int r) {
+	  //quicksort in descending order
+	  int pivot = priorities[p]; // set pivot to be leftmost item
+	  int i = p ;
+	  for (int j = p + 1; j <= r ; j++) {
+		  if (priorities[j] > pivot) { //if priority is greater than pivot and is placed on RHS, increment count
+			  count ++;
+			  i++;
+			  int temp = priorities[i];//reference to current priority
+			  priorities[i] = priorities[j];// swap i & j
+			  priorities[j] = temp;
+
+
+		  }
+
 	  }
-  }
+	  int temp = priorities[i];//swap i & p
+	  priorities[i] = priorities[p];
+	  priorities[p] = temp;
+	  
+	  return i;
+}
 }
