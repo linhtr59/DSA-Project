@@ -1,0 +1,10 @@
+#BlueJ class context
+comment0.target=FinesImpl
+comment0.text=\n\ An\ implementation\ of\ the\ Fines\ problem\ from\ the\ 2022\ CITS2200\ Project\n
+comment1.params=priorities
+comment1.target=long\ countFines(int[])
+comment2.params=priorities\ p\ r
+comment2.target=void\ quickSort(int[],\ int,\ int)
+comment3.params=priorities\ p\ r
+comment3.target=int\ partition(int[],\ int,\ int)
+numComments=4
