@@ -47,3 +47,20 @@ public class FinesImpl implements Fines {
 	  return i;
 }
 }
+
+
+
+/* Insertion sort implementation
+	long count = 0; //intialise fine count
+	for (int i = 1; i < priorities.length; i++) { //start from second, loop thru array
+		int key = priorities[i]; // reference to current priority
+		int j = i - 1; // pointer to previous priority
+		while (j >= 0 && priorities[j] < key) { //as long as priority is smaller than current
+			count ++; //increment count
+			priorities[j+1] = priorities[j];
+			j--;
+		}
+		priorities[j+1] = key;
+	}
+    return count;
+  } */
