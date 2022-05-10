@@ -1,7 +1,0 @@
-#BlueJ class context
-comment0.target=Cargo
-comment0.text=\n\ Interface\ used\ for\ testing\ Cargo\ problem\ from\ the\ 2022\ CITS2200\ Project\n\n\ DO\ NOT\ MODIFY\ THIS\ FILE\n
-comment1.params=stops\ queries
-comment1.target=int[]\ departureMasses(int,\ Cargo.Query[])
-comment1.text=\n\ After\ each\ query,\ compute\ the\ total\ cargo\ mass\ that\ will\ be\ on\ board\ when\n\ departing\ from\ the\ port\ where\ we\ collected\ the\ new\ cargo.\n\ @param\ \ stops\ \ \ the\ number\ of\ stops\ on\ the\ route\n\ @param\ \ queries\ a\ list\ of\ queries\ to\ be\ performed\n\ @return\ \ \ \ \ \ \ \ \ the\ total\ cargo\ on\ board\ after\ the\ corresponding\ query\n
-numComments=2
