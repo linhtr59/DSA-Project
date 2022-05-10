@@ -10,57 +10,56 @@ public class FinesImpl implements Fines {
 	private long count;
   public long countFines(int[] priorities) {
     // TODO: Implement your solution
-    quickSort(priorities, 0, (priorities.length -1));
-	return count;
+      mergeSort(priorities, 0, priorities.length-1);
+      return count;
   }
   
+  private void merge(int[] priorities, int left, int middle, int right) {
+      int[] leftArray = new int[middle - left +1];
+      int[] rightArray = new int[right - middle];
+      for (int i =0; i < leftArray.length; i++) {
+          leftArray[i] = priorities[left+i]; 
+      }
+      for (int i =0; i<rightArray.length; i++) {
+          rightArray[i] = priorities[middle+1+i];
+      }
+      
+      int leftIndex = 0;
+      int rightIndex = 0;
+      int subIndex = left;
+      while( leftIndex < leftArray.length && rightIndex < rightArray.length) { 
+          if (leftArray[leftIndex] < rightArray[rightIndex]) { // if first item of left index < first item of right index
+              count += leftArray.length - leftIndex;
+              priorities[subIndex] = rightArray[rightIndex]; // move to correct position
+              rightIndex ++; 
+          }
+          else {
+              priorities[subIndex] = leftArray[leftIndex];
+              leftIndex++;
+          }
+          subIndex++;
+      }
+      
+      while (leftIndex < (middle - left +1)) {
+          priorities[subIndex] = leftArray[leftIndex];
+          leftIndex++;
+          subIndex++;
+      }
+      
+      while (rightIndex < (right - middle)) {
+          priorities[subIndex] = rightArray[rightIndex];
+          rightIndex++;
+          subIndex++;
+      }
+      
   
-  private void quickSort(int[] priorities, int p, int r ) {
-	  if (p < r) {
-		  int pivot = partition(priorities,p,r);
-		  quickSort(priorities, p, pivot);
-		  quickSort(priorities, pivot + 1, r);
-	  }
   }
-  
-  
-  private int partition(int[] priorities, int p, int r) {
-	  //quicksort in descending order
-	  int pivot = priorities[p]; // set pivot to be leftmost item
-	  int i = p ;
-	  for (int j = p + 1; j <= r ; j++) {
-		  if (priorities[j] > pivot) { //if priority is greater than pivot and is placed on RHS, increment count
-			  count ++;
-			  i++;
-			  int temp = priorities[i];//reference to current priority
-			  priorities[i] = priorities[j];// swap i & j
-			  priorities[j] = temp;
-
-
-		  }
-
-	  }
-	  int temp = priorities[i];//swap i & p
-	  priorities[i] = priorities[p];
-	  priorities[p] = temp;
-	  
-	  return i;
+  private void mergeSort(int[] priorities, int left, int right) {
+      if (right>left) {
+          int mid = (left+right)/2;
+          mergeSort(priorities, left, mid);
+          mergeSort(priorities, mid+1, right);
+            merge(priorities, left, mid, right);
+      }
+  }
 }
-}
-
-
-
-/* Insertion sort implementation
-	long count = 0; //intialise fine count
-	for (int i = 1; i < priorities.length; i++) { //start from second, loop thru array
-		int key = priorities[i]; // reference to current priority
-		int j = i - 1; // pointer to previous priority
-		while (j >= 0 && priorities[j] < key) { //as long as priority is smaller than current
-			count ++; //increment count
-			priorities[j+1] = priorities[j];
-			j--;
-		}
-		priorities[j+1] = key;
-	}
-    return count;
-  } */
