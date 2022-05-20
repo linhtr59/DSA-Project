@@ -1,0 +1,17 @@
+Implementation:
+
+Uses Dijkstra algorithm to find the minimum depth to each point. 
+
+Maintain a priority queue (pq) of type Edge to store all the edges. In pq, edges with smaller depth have higher priority. Array d and array seen of size ports will be used to keep track of the minimum depth till date of a port and whether that port had been visited respectively. 
+
+Initially, d[originalPort] is set to MAX.VALUE and added to pq. Loop through pq as long as it is not empty and perform the following:
+•	Dequeue the current edge and store its vertex in variable “vertex”
+•	Mark seen[vertex] to be 1 
+•	Loop through Lanes and if the lanes arrive (vertex) is connected to the current vertex and it has not been seen => check if both the edge’s depth and the depth of the current path so far is larger than the depth of the arrival port. If yes, replace d[arrive] with the smaller value between depth and d[depart]
+•	Add the new edge to pq
+
+
+Complexity:
+The time complexity of this implementation is O(Llog(P)). 
+•	O(L): as the function iterates through the lanes array to visit all vertex and all of its edges
+•	O(log Ports) to account for when adding edges to the priority queue, it may trigger heapify in the worst case. 
