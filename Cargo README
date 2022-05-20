@@ -1,0 +1,21 @@
+IMPLEMENTATION
+The solution used Fenwick tree as its underlying data structure. 
+
+An array of size stop (mass) is used to keep track of the cargo mass at the origin of each query.
+
+Fenwick tree “fw” keeps track of the cargo mass at all different stops and as we loop through queries, “fw” will make call to its update methods and get Sum methods in order to update mass accordingly and return the cargo mass at collection port. 
+
+
+COMPLEXITY
+The overall time complexity of the solution is O(Query.log(stops))
+
+The solution implements a Fenwick tree (Binary Indexed Tree) as its underlying data structure. The foundation of Fenwick tree builds on the fact that all integers can be represented as sum of powers of two. 
+
+
+Thus, when updating the array at a particular position, Fenwick tree implementation requires updates to be done to the parents of the index or the index + its last significant set bit. This requires O(logn) time – where n is the number of stops. 
+
+And getting the sum of the array from 0 to a particular index requires adding array[currentIndex] to the values of children index or the index – its last significant set bit. This also requires O(logn) times - where n is the number of stops.
+
+Looping through the queries to update values will take O(Q) time
+
+Total time: O(Queries. 2log(stops))
