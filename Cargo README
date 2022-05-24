@@ -1,21 +1,32 @@
 IMPLEMENTATION
-The solution used Fenwick tree as its underlying data structure. 
+The solution used Fenwick tree as its underlying data structure. Two fenwicktree maintaining reference to update the cargoMasses at each port based on 
+collect and deliver.  Upon each queries in queries; fenwick tree call updat methods to update the array at collect and at deliver
 
-An array of size stop (mass) is used to keep track of the cargo mass at the origin of each query.
+The cargo mass at the collection port of each queries is mapped to mass1 and mass2 respectively of the two fenwick tree. This is done through the call to 
+method getSum of fenwick tree which return the prefix sum of the ports from 0 to the collect port.
 
-Fenwick tree “fw” keeps track of the cargo mass at all different stops and as we loop through queries, “fw” will make call to its update methods and get Sum methods in order to update mass accordingly and return the cargo mass at collection port. 
+Map3 will return the result of the ports
+
+Proof of correctness:
+Update: in order to update array[i] we need to update all fwt[i] 
+
 
 
 COMPLEXITY
 The overall time complexity of the solution is O(Query.log(stops))
 
-The solution implements a Fenwick tree (Binary Indexed Tree) as its underlying data structure. The foundation of Fenwick tree builds on the fact that all integers can be represented as sum of powers of two. 
+The solution implements a Fenwick tree (Binary Indexed Tree) as its underlying data structure. The foundation of Fenwick tree builds on the fact that
+all integers can be represented as sum of powers of two. 
 
 
-Thus, when updating the array at a particular position, Fenwick tree implementation requires updates to be done to the parents of the index or the index + its last significant set bit. This requires O(logn) time – where n is the number of stops. 
+Thus, when updating the array at a particular position, Fenwick tree implementation requires updates to be done to the parents of the index or the 
+index + its last significant set bit. This requires O(logn) time – where n is the number of stops. 
 
-And getting the sum of the array from 0 to a particular index requires adding array[currentIndex] to the values of children index or the index – its last significant set bit. This also requires O(logn) times - where n is the number of stops.
+And getting the sum of the array from 0 to a particular index requires adding array[currentIndex] to the values of children index or the index – its 
+last significant set bit. This also requires O(logn) times - where n is the number of stops.
 
-Looping through the queries to update values will take O(Q) time
+Looping through queries to retrieve data: O(n) times where n is the number of queries;
+Update fenwick tree and get array: O(logn) time and the array traversal will update/ get sum of the index then increment/decrement it by its least 
+significant set bit instead of the usual +/- 1 like in regular for loop
 
 Total time: O(Queries. 2log(stops))
