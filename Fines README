@@ -1,16 +1,33 @@
 IMPLEMENTATION
-The solution implements merge sort algorithm where the given array is broken into half recursively until only one single element is left (done through mergeSort method). A private variable count is initialised to 0 and aims to keep track of the number of fines. The items broken down is then again recursively merged (done through merge method) until a complete sorted array is formed. While merging the smaller subarrays, count is incremented by the number of elements that was misplaced. 
+The solution implements merge sort algorithm which is a divide and conquer algorithm. However instead of sorting priorities in ascending order
+we will be sorting the priority array in descending order
 
-The arrays broken down is then passed through to merge function which will keep hold of two reference array “leftArray” and “rightArray”.  “leftArray” and “rightArray” will be filled with the elements on left-and right-hand side of the queue respectively. 
+Divide: where the given array is broken into half recursively until only single element array is left (done through mergeSort method). Since single element
+arrays are trivially sorted as there are no element to compare to, we then move to conquer
 
-Two index pointers “leftIndex” and “rightIndex” are used to compare the elements of the subarrays. Given that left and right index are the same; if an item on the right subarray at current index is greater than that index of left subarray -> indicates a fine should be issued. Count is incremented by the number of items yet to be processed in the left array as when a ship fails to give way it incurs not just one file but a file for every single ship with higher priority that it cut off.
+Conquer: A private variable count is initialised to 0 and aims to keep track of the number of fines issues. While merging the smaller subarrays, count 
+is incremented by the number of elements that was misplaced. 
+
+The items broken down is recursively merged (done through merge method) until a complete sorted array is formed. The arrays broken down is then passed 
+through to merge function which will keep hold of two reference array “leftArray” and “rightArray”; “leftArray” and “rightArray” will be filled with the 
+elements on left-and right-hand side of the priority subarrays respectively. Two index pointers “leftIndex” and “rightIndex” are used to compare the 
+elements of the subarrays. 
+
+Given that left and right index are the same; if an item on the right subarray at current index is greater than that index of left subarray
+ -> indicates a fine should be issued. Count is incremented by the number of items yet to be processed in the left array as when a ship fails to give way
+it incurs not just one file but a file for every single ship with higher priority that it cut off.
+
+
+   
 
 
 COMPLEXITY
-The time complexity of this implementation is O(NlogN) where N is the number of ships that passed. Merge sort is a divide and conquer algorithm and the priority array is repeatedly halved. 
+The time complexity of this implementation is O(NlogN) where N is the number of ships that passed. Merge sort is a divide and conquer algorithm and 
+the priority array is repeatedly halved. 
 
-Divide: computes the middle of each priorities subarray passed in taking O(1) times – constant time
-Conquer: recursively pass in the two subarrays into merge and sort them in descending order. As arrays are halved into subarrays, this requires O(logN) times
+Divide: computes the middle of each priorities subarray passed in taking O(1) times – constant time 
+Conquer: recursively pass in the two subarrays into merge and sort them in descending order. As arrays are halved into subarrays, this requires 
+O(logN) times
 Merge: merging of N elements takes O(N) times
 
 Therefore, the overall computational time complexity of this implementation takes O(NlogN) times
