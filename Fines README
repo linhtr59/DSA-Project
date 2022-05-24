@@ -18,7 +18,14 @@ Given that left and right index are the same; if an item on the right subarray a
 it incurs not just one file but a file for every single ship with higher priority that it cut off.
 
 
-   
+Proof of correctness:
+Divide: the method will always terminate as the breakpoint (base case) is set when end is <= start. Furthermore, an array of size 1 is always trivially 
+sorted 
+Conquer: suppose divide section leave us with two arrays: leftArray being [1] and rightArray being [2,3]. As we progress through our iteration in merge
+first rightArray[0] - 3 is greater than leftArray[0] - 1 thus we write 3 into first element of the sorted array and increment count by untouched element
+of leftArray (+1). We repeat the steps and get the sorted array [3,2,1] and count was incremented by 2 which produce correct output. 
+
+This alogrithm will work for every subarrays belonging to original prioirty array.
 
 
 COMPLEXITY
