@@ -25,7 +25,11 @@ Conquer: suppose divide section leave us with two arrays: leftArray being [1] an
 first rightArray[0] - 3 is greater than leftArray[0] - 1 thus we write 3 into first element of the sorted array and increment count by untouched element
 of leftArray (+1). We repeat the steps and get the sorted array [3,2,1] and count was incremented by 2 which produce correct output. 
 
-This alogrithm will work for every subarrays belonging to original prioirty array.
+This alogrithm will work for every two subarrays belonging to original prioirty array as long as the sum of size of two sub arrays is no greater than the 
+length of original array. 
+
+We can say that fines will always be calculated correctly as the priority array after mergesort will be sorted correctly in descending order and while 
+sorting; fines is incremented with all of the higher priority ships that it cut off (increment count by unmarked element of leftArray)
 
 
 COMPLEXITY
