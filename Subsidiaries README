@@ -1,0 +1,21 @@
+Implementation
+
+Results maintain a reference to the id of the company
+Owners network is represented by Graph datastructure implementing adjacency list. 
+As we loop throgh queries, we intialised the current owner id in result to be -1 (does not exist) and use two stack 
+to store the data. 
+
+
+Proof of correctness
+
+
+
+Complexity:
+Time complexity for the current implementation is O(NQ) where N is the number of owners and Q is the number 
+of queries. 
+
+Construction of graph: loop through all owners to add into graph takes O(N) times
+Identifying subsidiaries: require query array to be traversed to investigate each query to find payer and payee. 
+
+Thus total complexity (amortized as we could not have used isadjacent method of graph if graph was not constructed)
+is O(NQ).
