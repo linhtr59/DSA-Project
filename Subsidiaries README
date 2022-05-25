@@ -2,11 +2,26 @@ Implementation
 
 Results maintain a reference to the id of the company
 Owners network is represented by Graph datastructure implementing adjacency list. 
-As we loop throgh queries, we intialised the current owner id in result to be -1 (does not exist) and use two stack 
-to store the data. 
+As we loop throgh queries, we intialised the current owner id in result to be -1 (does not exist) and 
+use two stack to store the data - stack1 to maintain payer and stack2 to maintain payee. 
+
+If result of payer and payee is equal in the queries, we update the result at current index to be the payer. Else
+
+We explore whether the queries' payer/payee has any adjacent element 
+-> if not: push itself to stack
+-> if yes: push  the itself and the neighbouring branch
+to stack1/stack 2 respectively. 
+
+results is then updated with stack1.peek() if the two are equal or stay as -1 as no id is found
+
 
 
 Proof of correctness
+Our algorithm can be proven correct as once an id is added to result queries; 
+it is the smallest company that owns both payer and payee. 
+
+If payer == payee; the payment is deemed internal and the solution is trivial
+....... 
 
 
 
