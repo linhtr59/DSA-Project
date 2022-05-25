@@ -21,12 +21,15 @@ it incurs not just one file but a file for every single ship with higher priorit
 Proof of correctness:
 Divide: the method will always terminate as the breakpoint (base case) is set when end is <= start. Furthermore, an array of size 1 is always trivially 
 sorted 
-Conquer: suppose divide section leave us with two arrays: leftArray being [1] and rightArray being [2,3]. As we progress through our iteration in merge
-first rightArray[0] - 3 is greater than leftArray[0] - 1 thus we write 3 into first element of the sorted array and increment count by untouched element
-of leftArray (+1). We repeat the steps and get the sorted array [3,2,1] and count was incremented by 2 which produce correct output. 
+Conquer: the method will always terminate at either leftIndex or rightIndex will at one point be equal to the array length
+To prove that conquer is always correct; it can be observed that once an element is placed into the sortedarray S,
+it is the maximum between itself and the item being it is being compared to. 
 
-This alogrithm will work for every two subarrays belonging to original prioirty array as long as the sum of size of two sub arrays is no greater than the 
-length of original array. 
+let L be the left index and L is at index i which 0<i<L.length 
+let R be the left index and R is at index j which 0<j<R.length 
+
+comparison of L[i] and R[j] will be trivial and thus the largest element of the two will be inputed such as
+L[i] > R[j] => > L[i] is inputed into S. Only when R[i] > L[i] a failure to giveway is indicated and count will be incremented accordingly
 
 We can say that fines will always be calculated correctly as the priority array after mergesort will be sorted correctly in descending order and while 
 sorting; fines is incremented with all of the higher priority ships that it cut off (increment count by unmarked element of leftArray)
