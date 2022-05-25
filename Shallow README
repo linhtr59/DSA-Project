@@ -19,18 +19,29 @@ Let D(s,u) be the actual minimum depth between s to u
 Let d(s,u) be the minimum depth our algorithm computed
 We say as soon as a vertex is dequeued from PQ and marked as visited; its minimum depth is finalised or d(s,u) = D(s,u)
 
-Contradiction:
+Contradiction - Dijkstra algorithm
 supposed if this is false and there exist a vertex when dequeued from pq d(s,u) != D(s,u)
-Let x be the first vertex along this path; there exist a path with min depth > 0 from s to x and a 
+Let x be the first vertex along this incorrect path (assume all previous path were correct); there exist a path with min depth > 0 from s to x and a 
 path greater than 0 from x to its predesscor y which belongs to the queue
 
 d[y] = D[y] as x,y would have beened examined when x was added to the set of elements removed from pq
-as y will be before u on path p (s-> u); D(s,y) < D(s,u) thus d[y] < d[u]
+as y will be before u on path p (s-> u); 
+D(s,y) < D(s,u) thus d[y] < d[u]
 however, u was dequed from pq before y thus d[u] <= d[u]
 
 => can only happen if d[u] = D[s,u) = D(s,y) = d[y]
 => contradict intial assumption that d[u] != D[s,u]
 
+As we can now prove that Dijkstra algorithm is correct by contracdiction; our algorithm implement the underlying theorem of Dijkstra and thus will always
+finalise the minimum depth once a port is marked visited. 
+One different point in algorithm is how we worked out the minimum depth. 
+Let p be the port currently being examined
+In query q there presents {p, i, newDepth}
+If the minimum depth to arrive to p and the new depth are both larger than current d[i] or if d[i] == 0 (never been accounted for);
+there exist an alterative pathway with a greater minimum depth than that of d[i] that we previously decided on. 
+
+d[p] >= newDepth > d[i] is trivial to calculate thus will always produce the correct output. 
+We then replace d[i] with the smaller value between d[p] and newDepth - also trival output; will always be correct
 
 
 Complexity:
