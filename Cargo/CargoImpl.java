@@ -3,6 +3,7 @@
 /*
  * An implementation of the Cargo problem from the 2022 CITS2200 Project
  */
+import java.util.*;
 
 public class CargoImpl implements Cargo {
   /**
@@ -10,45 +11,60 @@ public class CargoImpl implements Cargo {
    */
   public int[] departureMasses(int stops, Query[] queries) {
     // TODO: Implement your solution
-      int [] mass = new int[queries.length];
-      fenwicktree fwt = new fenwicktree(stops);   
-      for (int i =0; i < queries.length; i ++) {
-          if (queries[i].collect < queries[i].deliver) {
-              fwt.update(queries[i].collect, queries[i].cargoMass);
-              mass[i] = fwt.getSum(queries[i].collect);
-            }
-          else if (queries[i].collect == queries[i].deliver){
-             mass[i] = fwt.getSum(queries[i].collect);
-            }
-          }
-      return mass;
-  }
-  
-  
-  class fenwicktree{
-      private int[] tree;
-      public fenwicktree( int n) {
-          this.tree = new int[n];
-          }
+      int [] ports = new int[stops];
+      for (int i =0; i < ports.length; i++){
+          ports[i] =0;
+      }
+      
+      int [] m1 = new int[queries.length];
+      int [] m2 = new int[queries.length];
+      int [] m3 = new int[queries.length];
 
-      public void update(int i, int x) {
-          while (i < tree.length) {
-              tree[i] = tree[i] + x;
-              i += i & -i;
-          }          
-      }
-      
-   
-      public int getSum(int i) { // calculates the prefix sum array from 0 to i
-          int sum = 0;
-          while (i!= 0){
-              sum += tree[i];
-              i -= i & -i;
-          }
-          return sum;
-      }
-      
-      }
-    
+      FenwickTree tree1 = new FenwickTree();
+      tree1.addFenTree (ports,stops);
+      FenwickTree tree2 = new FenwickTree();
+      tree2.addFenTree (ports,stops);
+
+      for (int i =0; i < queries.length; i ++){
+          tree1.updateFenwick(stops, queries[i].collect, queries[i].cargoMass);
+          m1[i] = tree1.getSum(queries[i].collect);
+          tree2.updateFenwick(stops, queries[i].deliver, queries[i].cargoMass);
+          m2[i] = tree2.getSum(queries[i].collect);
+          m3[i] = m1[i] - m2[i];
+       }
+
+       return m3;
+    }
+
+    class FenwickTree{
+        private static final int max = 9999999;
+        private int[] tree = new int[max];
+
+        public int getSum(int i){
+            i++;
+            int sum = 0;
+            while (i > 0){
+                sum += tree[i];
+                i -= i & (-i);
+            }
+            return sum;
+        }
+
+        public void updateFenwick (int s, int i, int val){
+            i ++; 
+            while (i <= s){
+                tree[i] += val;
+                i += i & (-i);
+            }
+        }
+
+        public void addFenTree(int [] arr, int s){
+            for (int i = 0; i < s; i ++){
+                tree[i] = 0;
+            }
+            for (int i = 0; i < s; i ++){
+                updateFenwick(s, i, arr[i]);
+            }
+        }
+    }
 }
-
