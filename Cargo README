@@ -8,8 +8,30 @@ method getSum of fenwick tree which return the prefix sum of the ports from 0 to
 Map3 will return the result of the ports
 
 Proof of correctness:
-Update: in order to update array[i] we need to update all fwt[i] 
+Given the array a[] represent the cargoMass at each port; we have fwt[] desgined to update and query a[]
+we have: 
+fwt[1] = a[1]
+fwt[2] = fwt[1] + a[2]
+fwt[3] = a[3]
 
+The formalised prove of correctness of Fenwick tree can be found at Fenwick Tree and its Application in Solving the Sum of Subsequence (2014).
+But in short: 
+
+
+Update: 
+if a[i] was changed, there are elements in fwt that needs to be revised:
+FWT(p1), FWT(p2),..., FWT(pm) where (p| i1 < i2 < ... < m) such that p1< p2 < .. < m
+Update is proved to be correct by induction as fwt[i] modified after the update query will always
+reflect the correct sum in relation to a[]
+
+getSum:
+fwt[i] is the parents and will always hold the sum of its previous child lsb index. 
+thus if we wish to find the sum of a[] array at fwt[i], we increment the sum with fwt[i] then clear the last significant bit as we 
+traverse the array as fwt[i] would have already contained the sum of this child. 
+
+As we can now prove that update and query will always produce the correct output, our array to update the collect with cargoMass and 
+deliver with CargoMass will expect the right output. The subtraction of array1[] and array2[] will be trivial which leaves us with the correct cargo
+mass at collect port of each query
 
 
 COMPLEXITY
@@ -30,3 +52,8 @@ Update fenwick tree and get array: O(logn) time and the array traversal will upd
 significant set bit instead of the usual +/- 1 like in regular for loop
 
 Total time: O(Queries. 2log(stops))
+
+
+
+Reference
+Pan, D., & Chen, Y. (2014) Fenwick Tree and its Application in Solving the Sum of Subsequence. International Journal of Engineering Technology and Advanced Engineering. Vol 4 Issues 7
