@@ -17,7 +17,7 @@ the depth of the current path so far is larger than the depth of the arrival por
 Proof of correctness: 
 Let D(s,u) be the actual minimum depth between s to u
 Let d(s,u) be the minimum depth our algorithm computed
-We say as soon as a vertex is dequeued from PQ; its minimum depth is finalised or d(s,u) = D(s,u)
+We say as soon as a vertex is dequeued from PQ and marked as visited; its minimum depth is finalised or d(s,u) = D(s,u)
 
 Contradiction:
 supposed if this is false and there exist a vertex when dequeued from pq d(s,u) != D(s,u)
